@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>LogIN</title>
+    <jsp:include page="partials/head.jsp"/>
 </head>
 <body>
+<jsp:include page="partials/navbar.jsp"/>
     <h1>Login</h1>
     <form action="login.jsp" method="post">
         <label for="username">Username:</label>
