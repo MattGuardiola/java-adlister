@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/pickcolor" method="POST">
+<form action="/guess" method="POST">
     <label>Choose a number between 1 and 3:</label>
     <input type="text" name="userNumber"><br><br>
 
