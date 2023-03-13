@@ -15,9 +15,6 @@ public class Ad implements Serializable {
         this.description = description;
     }
 
-    public Ad() {
-    }
-
     public long getId() {
         return id;
     }
