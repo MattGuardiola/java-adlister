@@ -13,10 +13,10 @@
     <title>My Ads</title>
 </head>
 <body>
-<h1>HELLO</h1>
+<h1>Current Ads</h1>
 <c:forEach var="ad" items="${ads}">
     <div class="card">
-        <p>${ad.title}</p>
+        <h2>${ad.title}</h2>
         <p>${ad.description}</p>
     </div>
 </c:forEach>
