@@ -46,15 +46,15 @@ public class MySQLAdsDao implements Ads{
         }
     }
 
-    @Override
-    public Long insert (Ad ad) {
-        try{
-            Statement stmt = connection.createStatement();
-            String sql = String.format("INSERT INTO ads (title, description, user_id) VALUES ('%s, '%s', %d);", ad.getTitle(), ad.getDescription(), ad.getUserId());
-            long results = stmt.executeUpdate(sql);
-            return results;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public Long insert (Ad ad) {
+//        try{
+//            Statement stmt = connection.createStatement();
+//            String sql = String.format("INSERT INTO ads (title, description, user_id) VALUES ('%s, '%s', %d);", ad.getTitle(), ad.getDescription(), ad.getUserId());
+//            long results = stmt.executeUpdate(sql);
+//            return results;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

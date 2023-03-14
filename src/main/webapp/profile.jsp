@@ -13,5 +13,6 @@
 </head>
 <body>
     <jsp:include page="partials/navbar.jsp"/>
+<h1>THIS IS YOUR PROFILE</h1>
 </body>
 </html>
