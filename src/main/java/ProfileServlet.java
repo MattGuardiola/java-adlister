@@ -16,6 +16,8 @@ public class ProfileServlet extends HttpServlet {
 
         if (username == null){
             response.sendRedirect("/login");
+        } else {
+            request.getRequestDispatcher("/profile.jsp").forward(request, response);
         }
     }
 }
