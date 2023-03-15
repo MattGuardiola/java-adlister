@@ -2,11 +2,49 @@ package com.codeup.adlister.models;
 
 public class User {
     private long id;
+    private String firstname;
+    private String lastname;
     private String username;
     private String email;
     private String password;
 
     public User() {}
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public User(String firstname, String lastname, String username, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     public User(long id, String username, String email, String password) {
         this.id = id;
