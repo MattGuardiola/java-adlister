@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +14,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -57,10 +54,10 @@ public class MySQLAdsDao implements Ads {
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description")
         );
     }
 
@@ -71,4 +68,41 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-}
+
+    @Override
+    public List<Ad> returnSearchResults(String searchQuery) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ymir_matt.ads WHERE title LIKE ? OR description LIKE ?");
+            stmt.setString(1, "%" + searchQuery + "%");
+            stmt.setString(2, "%" + searchQuery + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            List<Ad> searchResults = new ArrayList<>();
+            while (rs.next()) {
+                Ad ad = new Ad();
+                ad.setTitle(rs.getString("title"));
+                ad.setDescription(rs.getString("description"));
+                searchResults.add(ad);
+            }
+            return searchResults;
+        } catch (SQLException e) {
+            System.out.println("Error fetching results");
+            return null;
+        }
+    }
+
+
+    @Override
+    public List<Ad> usersAds(Long userID) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ymir_matt.ads INNER JOIN ymir_matt.users ON ads.user_id = users.id WHERE ads.user_id = ?");
+            stmt.setLong(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    }
+
